@@ -22,7 +22,7 @@ Date.prototype.format = function(format){
 };
 
 $(document).ready(function(){
-	var host = location.href.replace(/http:\/\//i,"");
+	var host = location.href.replace(/http:\/\//i,"");   //不区分大小写
 	window.CHAT = {
 		//保存服务器端WebSocket的请求地址
 		serverAddr:"ws://" + host + "im",
@@ -65,10 +65,11 @@ $(document).ready(function(){
 		//发送聊天消息
 		sendText:function() {
 			var message = $("#send-message");
-			//去掉空格
+			//去掉空格(正则表达式的意思：不区分大小写地全局匹配所有的空格、回车、换行等特殊字符)
 			if(message.html().replace(/\s/ig,"") == ""){ return; }
 		    if (!window.WebSocket) { return; }
 		    if (CHAT.socket.readyState == WebSocket.OPEN) {
+				//正则表达式的意义：不区分大小写全局匹配所有换行符并替换为<br/>
 		    	var msg = ("[CHAT][" + new Date().getTime() + "]" + "[" + CHAT.nickname + "] - " + message.html().replace(/\n/ig,"<br/>"));
 		    	CHAT.socket.send(msg);
 		    	message.empty();
