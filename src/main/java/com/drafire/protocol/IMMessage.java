@@ -16,9 +16,6 @@ public class IMMessage {
     private String receiver;   //接收人
     private String content;    //内容
 
-    public IMMessage() {
-    }
-
     public String getAddr() {
         return addr;
     }
@@ -72,6 +69,29 @@ public class IMMessage {
     }
 
     public void setContent(String content) {
+        this.content = content;
+    }
+
+    //用于系统通知的构造方法
+    public IMMessage(String cmd, long time, int online, String content) {
+        this.cmd = cmd;
+        this.time = time;
+        this.online = online;
+        this.content = content;
+    }
+
+    //用于发送命令，比如刷鲜花的构造方法
+    public IMMessage(String cmd, long time, String sender) {
+        this.cmd = cmd;
+        this.time = time;
+        this.sender = sender;
+    }
+
+    //用于聊天的构造方法
+    public IMMessage(String cmd, long time, String sender, String content) {
+        this.cmd = cmd;
+        this.time = time;
+        this.sender = sender;
         this.content = content;
     }
 }
